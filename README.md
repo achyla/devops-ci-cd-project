@@ -126,3 +126,13 @@ gunicorn --bind=0.0.0.0 --timeout 600 app.main:app
 ## Cleanup
 
 After project evaluation, all Azure resources can be removed by deleting the Resource Group to avoid additional costs.
+
+## Secrets
+
+Sensitive values are stored in **GitHub Secrets** and are not committed to the repository.
+
+Used secrets:
+
+- `AZUREAPPSERVICE_PUBLISHPROFILE` – publish profile for Azure App Service deployment (used by GitHub Actions)
+
+Repo → Settings → Secrets and variables → Actions
