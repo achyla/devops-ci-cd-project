@@ -27,7 +27,6 @@ jobs:
         run: |
           pytest -q
 
-      # ZIP aplikacji do deployu (najprościej)
       - name: Create deployment package
         run: |
           zip -r app.zip . -x ".git/*" ".github/*" "__pycache__/*" "*.pyc" ".venv/*"
