@@ -67,12 +67,11 @@ def update_product(product_id):
 # DELETE - Usuń produkt
 @app.delete('/products/<int:product_id>')
 def delete_product(product_id):
-    global products_db
     product = next((p for p in products_db if p['id'] == product_id), None)
     if product is None:
         return jsonify({"error": "Produkt nie został znaleziony"}), 404
     
-    products_db = [p for p in products_db if p['id'] != product_id]
+    products_db.remove(product)
     return jsonify({"message": "Produkt został usunięty"}), 200
 
 if __name__ == '__main__':
