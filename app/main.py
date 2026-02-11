@@ -12,7 +12,7 @@ next_id = 4
 
 @app.route('/')
 def home():
-    return "Endpoint / jest dostępny. Użyj /products, aby zobaczyć listę produktów.", 200
+    return jsonify({"message": "Endpoint / jest dostępny ✅", "info": "Użyj /products, aby zobaczyć listę produktów."}), 200
 
 # READ - Pobierz wszystkie produkty
 @app.get('/products')
