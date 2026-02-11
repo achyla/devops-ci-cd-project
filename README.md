@@ -298,3 +298,19 @@ Used secrets:
 - `AZUREAPPSERVICE_PUBLISHPROFILE` – publish profile for Azure App Service deployment (used by GitHub Actions)
 
 Repo → Settings → Secrets and variables → Actions
+
+## Project Requirements Coverage
+
+### Mandatory
+- [x] Backlog with issues in GitHub Projects
+- [x] Repository with README and pull requests
+- [x] Web application with at least 2 endpoints (/, /products)
+- [x] Minimum 2 unit tests
+- [x] CI pipeline (GitHub Actions)
+- [x] CD pipeline (Azure App Service)
+- [x] Publicly available application
+
+### Additional Implemented Features
+- [x] Monitoring and logs (Azure App Service Log Stream)
+- [x] Secrets management (GitHub Secrets)
+- [x] Quality Gate in CI/CD (coverage threshold)
