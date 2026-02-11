@@ -1,6 +1,6 @@
 # DevOps CI/CD Flask Application
 
-This repository contains a simple Flask web application created as a university project for the DevOps course.  
+This repository contains a Flask REST API application with full CRUD operations, created as a university project for the DevOps course.  
 The main goal of the project is to demonstrate a complete CI/CD process using GitHub Actions and deployment to Azure App Service.
 
 ---
@@ -13,16 +13,20 @@ The application is deployed to Azure App Service and publicly available at:
 
 Available endpoints:
 
-- `/` – home endpoint
-- `/products` – returns a sample list of products in JSON format
+- `GET /` – home endpoint
+- `GET /products` – returns all products
+- `GET /products/<id>` – returns a single product
+- `POST /products` – creates a new product
+- `PUT /products/<id>` – updates an existing product
+- `DELETE /products/<id>` – deletes a product
 
 ---
 
 ## Technology Stack
 
 - Python 3
-- Flask
-- Pytest
+- Flask (REST API with CRUD operations)
+- Pytest with coverage reporting
 - GitHub Actions (CI/CD)
 - Azure App Service (Linux)
 
@@ -45,6 +49,149 @@ Available endpoints:
 ├── requirements.txt
 ├── README.md
 └── LICENSE
+```
+
+---
+
+## API Documentation
+
+### Get All Products
+
+**Request:**
+
+```http
+GET /products
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Dzik",
+    "price": 10.99
+  },
+  {
+    "id": 2,
+    "name": "Lays",
+    "price": 12.99
+  }
+]
+```
+
+### Get Single Product
+
+**Request:**
+
+```http
+GET /products/1
+```
+
+**Response (200 OK):**
+
+```json
+{
+  "id": 1,
+  "name": "Dzik",
+  "price": 10.99
+}
+```
+
+**Response (404 Not Found):**
+
+```json
+{
+  "error": "Produkt nie został znaleziony"
+}
+```
+
+### Create Product
+
+**Request:**
+
+```http
+POST /products
+Content-Type: application/json
+
+{
+  "name": "New Product",
+  "price": 99.99
+}
+```
+
+**Response (201 Created):**
+
+```json
+{
+  "id": 4,
+  "name": "New Product",
+  "price": 99.99
+}
+```
+
+**Response (400 Bad Request):**
+
+```json
+{
+  "error": "Wymagane pola: name, price"
+}
+```
+
+### Update Product
+
+**Request:**
+
+```http
+PUT /products/1
+Content-Type: application/json
+
+{
+  "name": "Updated Name",
+  "price": 15.99
+}
+```
+
+**Response (200 OK):**
+
+```json
+{
+  "id": 1,
+  "name": "Updated Name",
+  "price": 15.99
+}
+```
+
+**Response (404 Not Found):**
+
+```json
+{
+  "error": "Produkt nie został znaleziony"
+}
+```
+
+### Delete Product
+
+**Request:**
+
+```http
+DELETE /products/1
+```
+
+**Response (200 OK):**
+
+```json
+{
+  "message": "Produkt został usunięty"
+}
+```
+
+**Response (404 Not Found):**
+
+```json
+{
+  "error": "Produkt nie został znaleziony"
+}
 ```
 
 ---
@@ -86,10 +233,24 @@ http://127.0.0.1:5000
 
 ## Tests
 
-Unit tests are implemented using pytest.
+Unit tests are implemented using pytest and cover all CRUD operations.
+
+**Run all tests:**
 
 ```bash
 pytest
+```
+
+**Run tests with verbose output:**
+
+```bash
+pytest -v
+```
+
+**Run tests with coverage:**
+
+```bash
+pytest --cov=app tests/
 ```
 
 ## CI/CD Pipeline
@@ -117,6 +278,7 @@ gunicorn --bind=0.0.0.0 --timeout 600 app.main:app
 
 ## Project Objectives
 
+- Implement REST API with full CRUD operations
 - Practice Git workflow with branches and pull requests
 - Create a CI pipeline with automated testing
 - Create a CD pipeline with cloud deployment
