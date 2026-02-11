@@ -1,4 +1,4 @@
-from app.main import app, products_db, next_id
+from app.main import app
 import json
 
 def test_home_returns_200():
